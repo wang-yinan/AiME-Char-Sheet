@@ -103,10 +103,6 @@
                     <span data-i18n="animal_handling-u">ANIMAL HANDLING</span>
                     <input class="num" type="text" name="attr_npc_animal_handling_base" placeholder="0">
                 </div>
-                <div class="row" data-i18n-list-item="arcana">
-                    <span data-i18n="arcana-u">ARCANA</span>
-                    <input class="num" type="text" name="attr_npc_arcana_base" placeholder="0">
-                </div>
                 <div class="row" data-i18n-list-item="athletics">
                     <span data-i18n="athletics-u">ATHLETICS</span>
                     <input class="num" type="text" name="attr_npc_athletics_base" placeholder="0">
@@ -132,6 +128,10 @@
                 <div class="row" data-i18n-list-item="investigation">
                     <span data-i18n="investigation-u">INVESTIGATION</span>
                     <input class="num" type="text" name="attr_npc_investigation_base" placeholder="0">
+                </div>
+				<div class="row" data-i18n-list-item="arcana">
+                    <span data-i18n="arcana-u">ARCANA</span>
+                    <input class="num" type="text" name="attr_npc_arcana_base" placeholder="0">
                 </div>
                 <div class="row" data-i18n-list-item="medicine">
                     <span data-i18n="medicine-u">MEDICINE</span>
@@ -174,13 +174,13 @@
             </div>
             <input type="hidden" name="attr_npc_acrobatics" value="@{dexterity_mod}">
             <input type="hidden" name="attr_npc_animal_handling" value="@{wisdom_mod}">
-            <input type="hidden" name="attr_npc_arcana" value="@{intelligence_mod}">
             <input type="hidden" name="attr_npc_athletics" value="@{strength_mod}">
             <input type="hidden" name="attr_npc_deception" value="@{charisma_mod}">
             <input type="hidden" name="attr_npc_history" value="@{intelligence_mod}">
             <input type="hidden" name="attr_npc_insight" value="@{wisdom_mod}">
             <input type="hidden" name="attr_npc_intimidation" value="@{charisma_mod}">
             <input type="hidden" name="attr_npc_investigation" value="@{intelligence_mod}">
+			<input type="hidden" name="attr_npc_arcana" value="@{intelligence_mod}">
             <input type="hidden" name="attr_npc_medicine" value="@{wisdom_mod}">
             <input type="hidden" name="attr_npc_nature" value="@{intelligence_mod}">
             <input type="hidden" name="attr_npc_perception" value="@{wisdom_mod}">
@@ -441,13 +441,6 @@
                     <span class="stat" name="attr_npc_animal_handling"></span>
                 </button>
             </span>
-            <span data-i18n-list-item="arcana">
-                <input class="flag" type="hidden" name="attr_npc_arcana_flag" value="0">
-                <button type="roll" name="roll_npc_arcana" value="@{wtype}&{template:npc} @{npc_name_flag} {{rname=^{arcana}}} {{mod=@{npc_arcana}}} {{r1=[[@{d20}+@{npc_arcana}]]}} @{rtype}+@{npc_arcana}]]}} {{type=Skill}}">
-                    <span data-i18n="arcana">Arcana</span>
-                    <span class="stat" name="attr_npc_arcana"></span>
-                </button>
-            </span>
             <span data-i18n-list-item="athletics">
                 <input class="flag" type="hidden" name="attr_npc_athletics_flag" value="0">
                 <button type="roll" name="roll_npc_athletics" value="@{wtype}&{template:npc} @{npc_name_flag} {{rname=^{athletics}}} {{mod=@{npc_athletics}}} {{r1=[[@{d20}+@{npc_athletics}]]}} @{rtype}+@{npc_athletics}]]}} {{type=Skill}}">
@@ -488,6 +481,13 @@
                 <button type="roll" name="roll_npc_investigation" value="@{wtype}&{template:npc} @{npc_name_flag} {{rname=^{investigation}}} {{mod=@{npc_investigation}}} {{r1=[[@{d20}+@{npc_investigation}]]}} @{rtype}+@{npc_investigation}]]}} {{type=Skill}}">
                     <span data-i18n="investigation">Investigation</span>
                     <span class="stat" name="attr_npc_investigation"></span>
+                </button>
+            </span>
+			<span data-i18n-list-item="arcana">
+                <input class="flag" type="hidden" name="attr_npc_arcana_flag" value="0">
+                <button type="roll" name="roll_npc_arcana" value="@{wtype}&{template:npc} @{npc_name_flag} {{rname=^{arcana}}} {{mod=@{npc_arcana}}} {{r1=[[@{d20}+@{npc_arcana}]]}} @{rtype}+@{npc_arcana}]]}} {{type=Skill}}">
+                    <span data-i18n="arcana">Arcana</span>
+                    <span class="stat" name="attr_npc_arcana"></span>
                 </button>
             </span>
             <span data-i18n-list-item="medicine">
@@ -1157,11 +1157,6 @@
                             <span name='attr_animal_handling_bonus' title='@{animal_handling_bonus}'>0</span>
                             <button type='roll' name='roll_animal_handling' value='@{wtype}&{template:simple} {{rname=^{animal_handling-u}}} {{mod=@{animal_handling_bonus}}} {{r1=[[@{d20}+@{animal_handling_bonus}@{pbd_safe}]]}} @{rtype}+@{animal_handling_bonus}@{pbd_safe}]]}} @{global_skill_mod} @{charname_output}' data-i18n='animal_handling-core'>Animal Handling <span>(Wis)</span></button>
                         </div>
-                        <div class="skill" data-i18n-list-item="arcana">
-                            <input type="checkbox" name="attr_arcana_prof" title="@{arcana_prof}" value="(@{pb}*@{arcana_type})">
-                            <span name='attr_arcana_bonus' title='@{arcana_bonus}'>0</span>
-                            <button type='roll' name='roll_arcana' value='@{wtype}&{template:simple} {{rname=^{arcana-u}}} {{mod=@{arcana_bonus}}} {{r1=[[@{d20}+@{arcana_bonus}@{pbd_safe}]]}} @{rtype}+@{arcana_bonus}@{pbd_safe}]]}} @{global_skill_mod} @{charname_output}' data-i18n='arcana-core'>Arcana <span>(Int)</span></button>
-                        </div>
                         <div class="skill" data-i18n-list-item="athletics">
                             <input type="checkbox" name="attr_athletics_prof" title="@{athletics_prof}" value="(@{pb}*@{athletics_type})">
                             <span name='attr_athletics_bonus' title='@{athletics_bonus}'>0</span>
@@ -1191,6 +1186,11 @@
                             <input type="checkbox" name="attr_investigation_prof" title="@{investigation_prof}" value="(@{pb}*@{investigation_type})">
                             <span name='attr_investigation_bonus' title='@{investigation_bonus}'>0</span>
                             <button type='roll' name='roll_investigation' value='@{wtype}&{template:simple} {{rname=^{investigation-u}}} {{mod=@{investigation_bonus}}} {{r1=[[@{d20}+@{investigation_bonus}@{pbd_safe}]]}} @{rtype}+@{investigation_bonus}@{pbd_safe}]]}} @{global_skill_mod} @{charname_output}' data-i18n='investigation-core'>Investigation <span>(Int)</span></button>
+                        </div>
+						<div class="skill" data-i18n-list-item="arcana">
+                            <input type="checkbox" name="attr_arcana_prof" title="@{arcana_prof}" value="(@{pb}*@{arcana_type})">
+                            <span name='attr_arcana_bonus' title='@{arcana_bonus}'>0</span>
+                            <button type='roll' name='roll_arcana' value='@{wtype}&{template:simple} {{rname=^{arcana-u}}} {{mod=@{arcana_bonus}}} {{r1=[[@{d20}+@{arcana_bonus}@{pbd_safe}]]}} @{rtype}+@{arcana_bonus}@{pbd_safe}]]}} @{global_skill_mod} @{charname_output}' data-i18n='arcana-core'>Arcana <span>(Int)</span></button>
                         </div>
                         <div class="skill" data-i18n-list-item="medicine">
                             <input type="checkbox" name="attr_medicine_prof" title="@{medicine_prof}" value="(@{pb}*@{medicine_type})">
@@ -4209,11 +4209,6 @@
                         <span data-i18n="animal_handling-core">Animal Handling <span>(Wis)</span></span>
                         <span>+</span><input type="text" class="num" name="attr_animal_handling_flat" value="0" placeholder="0" title="@{animal_handling_flat}">
                     </div>
-                    <div class="row skill" data-i18n-list-item="arcana">
-                        <select name="attr_arcana_type"><option value="1" selected="selected" data-i18n="normal">Normal</option><option value="2" data-i18n="expirtise">Expertise</option></select>
-                        <span data-i18n="arcana-core">Arcana <span>(Int)</span></span>
-                        <span>+</span><input type="text" class="num" name="attr_arcana_flat" value="0" placeholder="0" title="@{arcana_flat}">
-                    </div>
                     <div class="row skill" data-i18n-list-item="athletics">
                         <select name="attr_athletics_type"><option value="1" selected="selected" data-i18n="normal">Normal</option><option value="2" data-i18n="expirtise">Expertise</option></select>
                         <span data-i18n="athletics-core">Athletics <span>(Str)</span></span>
@@ -4243,6 +4238,11 @@
                         <select name="attr_investigation_type"><option value="1" selected="selected" data-i18n="normal">Normal</option><option value="2" data-i18n="expirtise">Expertise</option></select>
                         <span data-i18n="investigation-core">Investigation <span>(Int)</span></span>
                         <span>+</span><input type="text" class="num" name="attr_investigation_flat" value="0" placeholder="0" title="@{investigation_flat}">
+                    </div>
+					<div class="row skill" data-i18n-list-item="arcana">
+                        <select name="attr_arcana_type"><option value="1" selected="selected" data-i18n="normal">Normal</option><option value="2" data-i18n="expirtise">Expertise</option></select>
+                        <span data-i18n="arcana-core">Arcana <span>(Int)</span></span>
+                        <span>+</span><input type="text" class="num" name="attr_arcana_flat" value="0" placeholder="0" title="@{arcana_flat}">
                     </div>
                     <div class="row skill" data-i18n-list-item="medicine">
                         <select name="attr_medicine_type"><option value="1" selected="selected" data-i18n="normal">Normal</option><option value="2" data-i18n="expirtise">Expertise</option></select>
@@ -4534,13 +4534,13 @@
 
 <input type='hidden' name='attr_acrobatics_bonus' value='0'>
 <input type='hidden' name='attr_animal_handling_bonus' value='0'>
-<input type='hidden' name='attr_arcana_bonus' value='0'>
 <input type='hidden' name='attr_athletics_bonus' value='0'>
 <input type='hidden' name='attr_deception_bonus' value='0'>
 <input type='hidden' name='attr_history_bonus' value='0'>
 <input type='hidden' name='attr_insight_bonus' value='0'>
 <input type='hidden' name='attr_intimidation_bonus' value='0'>
 <input type='hidden' name='attr_investigation_bonus' value='0'>
+<input type='hidden' name='attr_arcana_bonus' value='0'>
 <input type='hidden' name='attr_medicine_bonus' value='0'>
 <input type='hidden' name='attr_nature_bonus' value='0'>
 <input type='hidden' name='attr_perception_bonus' value='0'>
