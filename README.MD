@@ -7,3 +7,4 @@
 7. Replaced SRD picture and Inspiration picture. Shifted Inspiration.
 8. Translation changes.
 9. Class Overhaul.
+10. Added Exhaustion, Shadow, and Position.
