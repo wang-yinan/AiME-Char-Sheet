@@ -175,6 +175,10 @@
                     <span data-i18n="survival-u">SURVIVAL</span>
                     <input class="num" type="text" name="attr_npc_survival_base" placeholder="0">
                 </div>
+				<div class="row" data-i18n-list-item="traditions">
+                    <span data-i18n="traditions-u">TRADITIONS</span>
+                    <input class="num" type="text" name="attr_npc_traditions_base" placeholder="0">
+                </div>
             </div>
             <input type="hidden" name="attr_npc_acrobatics" value="@{dexterity_mod}">
             <input type="hidden" name="attr_npc_animal_handling" value="@{wisdom_mod}">
@@ -195,6 +199,7 @@
             <input type="hidden" name="attr_npc_sleight_of_hand" value="@{dexterity_mod}">
             <input type="hidden" name="attr_npc_stealth" value="@{dexterity_mod}">
             <input type="hidden" name="attr_npc_survival" value="@{wisdom_mod}">
+			<input type="hidden" name="attr_npc_traditions" value="@{intelligence_mod}">
         </div>
         <div class="row">
             <span data-i18n="damage-vuln-u">DAMAGE VULNERABILITIES</span>
@@ -563,6 +568,13 @@
                 <button type="roll" name="roll_npc_survival" value="@{wtype}&{template:npc} @{npc_name_flag} {{rname=^{survival}}} {{mod=@{npc_survival}}} {{r1=[[@{d20}+@{npc_survival}]]}} @{rtype}+@{npc_survival}]]}} {{type=Skill}}">
                     <span data-i18n="survival">Survival</span>
                     <span class="stat" name="attr_npc_survival"></span>
+                </button>
+            </span>
+			<span data-i18n-list-item="traditions">
+                <input class="flag" type="hidden" name="attr_npc_traditions_flag" value="0">
+                <button type="roll" name="roll_npc_traditions" value="@{wtype}&{template:npc} @{npc_name_flag} {{rname=^{traditions}}} {{mod=@{npc_traditions}}} {{r1=[[@{d20}+@{npc_traditions}]]}} @{rtype}+@{npc_traditions}]]}} {{type=Skill}}">
+                    <span data-i18n="traditions">Traditions</span>
+                    <span class="stat" name="attr_npc_traditions"></span>
                 </button>
             </span>
         </div>
@@ -1253,6 +1265,11 @@
                             <input type="checkbox" name="attr_survival_prof" title="@{survival_prof}" value="(@{pb}*@{survival_type})">
                             <span name='attr_survival_bonus' title='@{survival_bonus}'>0</span>
                             <button type='roll' name='roll_survival' value='@{wtype}&{template:simple} {{rname=^{survival-u}}} {{mod=@{survival_bonus}}} {{r1=[[@{d20}+@{survival_bonus}@{pbd_safe}]]}} @{rtype}+@{survival_bonus}@{pbd_safe}]]}} @{global_skill_mod} @{charname_output}' data-i18n='survival-core'>Survival <span>(Wis)</span></button>
+                        </div>
+						<div class="skill" data-i18n-list-item="traditions">
+                            <input type="checkbox" name="attr_traditions_prof" title="@{traditions_prof}" value="(@{pb}*@{traditions_type})">
+                            <span name='attr_traditions_bonus' title='@{traditions_bonus}'>0</span>
+                            <button type='roll' name='roll_traditions' value='@{wtype}&{template:simple} {{rname=^{traditions-u}}} {{mod=@{traditions_bonus}}} {{r1=[[@{d20}+@{traditions_bonus}@{pbd_safe}]]}} @{rtype}+@{traditions_bonus}@{pbd_safe}]]}} @{global_skill_mod} @{charname_output}' data-i18n='traditions-core'>Traditions <span>(Int)</span></button>
                         </div>
                     </div>
                     <div class="label">
@@ -4311,6 +4328,11 @@
                         <span data-i18n="survival-core">Survival <span>(Wis)</span></span>
                         <span>+</span><input type="text" class="num" name="attr_survival_flat" value="0" placeholder="0" title="@{survival_flat}">
                     </div>
+					<div class="row skill" data-i18n-list-item="traditions">
+                        <select name="attr_traditions_type"><option value="1" selected="selected" data-i18n="normal">Normal</option><option value="2" data-i18n="expirtise">Expertise</option></select>
+                        <span data-i18n="traditions-core">Riddle <span>(Int)</span></span>
+                        <span>+</span><input type="text" class="num" name="attr_traditions_flat" value="0" placeholder="0" title="@{traditions_flat}">
+                    </div>
                 </div>
                 <div class="row" style="margin-top:10px;">
                     <input type="checkbox" name="attr_jack_of_all_trades" value="@{jack}">
@@ -4573,6 +4595,7 @@
 <input type='hidden' name='attr_sleight_of_hand_bonus' value='0'>
 <input type='hidden' name='attr_stealth_bonus' value='0'>
 <input type='hidden' name='attr_survival_bonus' value='0'>
+<input type='hidden' name='attr_traditions_bonus' value='0'>
 
 <input type='hidden' name='attr_lvl1_slots_total' value='0'>
 <input type='hidden' name='attr_lvl2_slots_total' value='0'>
@@ -5717,7 +5740,7 @@
 
     on("change:intelligence_mod", function() {
         update_save("intelligence");
-        update_skills(["lore", "history", "investigation", "nature", "riddle", "shadowlore"]);
+        update_skills(["lore", "history", "investigation", "nature", "riddle", "shadowlore", "traditions"]);
         update_attacks("intelligence");
         update_tool("intelligence");
         update_spell_info("intelligence");
@@ -5853,10 +5876,17 @@
         if(eventinfo.sourceType === "sheetworker") {return;};
         update_skills(["riddle"]);
     });
+	
 	on("change:shadowlore_prof change:shadowlore_type change:shadowlore_flat", function(eventinfo) {
         if(eventinfo.sourceType === "sheetworker") {return;};
         update_skills(["shadowlore"]);
     });
+	
+	on("change:traditions_prof change:traditions_type change:traditions_flat", function(eventinfo) {
+        if(eventinfo.sourceType === "sheetworker") {return;};
+        update_skills(["traditions"]);
+    });
+	
     on("change:sleight_of_hand_prof change:sleight_of_hand_type change:sleight_of_hand_flat", function(eventinfo) {
         if(eventinfo.sourceType === "sheetworker") {return;};
         update_skills(["sleight_of_hand"]);
@@ -6133,7 +6163,7 @@
         }
         update_jack_attr();
         update_initiative();
-        update_skills(["athletics", "acrobatics", "sleight_of_hand", "stealth", "lore", "history", "investigation", "nature", "riddle", "shadowlore", "animal_handling", "insight", "medicine", "perception", "survival","deception", "intimidation", "performance", "persuasion"]);
+        update_skills(["athletics", "acrobatics", "sleight_of_hand", "stealth", "lore", "history", "investigation", "nature", "riddle", "shadowlore", "traditions", "animal_handling", "insight", "medicine", "perception", "survival","deception", "intimidation", "performance", "persuasion"]);
     });
 
     on("change:initmod change:init_tiebreaker", function(eventinfo) {
@@ -6159,7 +6189,7 @@
         update_npc_saves();
     });
 
-    on("change:npc_acrobatics_base change:npc_animal_handling_base change:npc_lore_base change:npc_athletics_base change:npc_deception_base change:npc_history_base change:npc_insight_base change:npc_intimidation_base change:npc_investigation_base change:npc_medicine_base change:npc_nature_base change:npc_perception_base change:npc_performance_base change:npc_persuasion_base change:npc_riddle_base change:npc_shadowlore_base change:npc_sleight_of_hand_base change:npc_stealth_base change:npc_survival_base", function(eventinfo) {
+    on("change:npc_acrobatics_base change:npc_animal_handling_base change:npc_lore_base change:npc_athletics_base change:npc_deception_base change:npc_history_base change:npc_insight_base change:npc_intimidation_base change:npc_investigation_base change:npc_medicine_base change:npc_nature_base change:npc_perception_base change:npc_performance_base change:npc_persuasion_base change:npc_riddle_base change:npc_shadowlore_base change:npc_traditions_base change:npc_sleight_of_hand_base change:npc_stealth_base change:npc_survival_base", function(eventinfo) {
         update_npc_skills();
     });
 
@@ -6811,6 +6841,7 @@
                 update["npc_persuasion_base"] = "";
                 update["npc_riddle_base"] = "";
 				update["npc_shadowlore_base"] = "";
+				update["npc_traditions_base"] = "";
                 update["npc_sleight_of_hand_base"] = "";
                 update["npc_stealth_base"] = "";
                 update["npc_survival_base"] = "";
@@ -7162,6 +7193,7 @@
             if(mod.indexOf("performance") > -1) {update_skills(["performance"]);};
             if(mod.indexOf("persuasion") > -1) {update_skills(["persuasion"]);};
             if(mod.indexOf("riddle") > -1) {update_skills(["riddle"]);};
+			if(mod.indexOf("traditions") > -1) {update_skills(["traditions"]);};
 			if(mod.indexOf("shadowlore") > -1) {update_skills(["shadowlore"]);};
             if(mod.indexOf("sleight of hand") > -1) {update_skills(["sleight_of_hand"]);};
             if(mod.indexOf("stealth") > -1) {update_skills(["stealth"]);};
@@ -8799,7 +8831,7 @@
     };
 
     var update_npc_skills = function() {
-        getAttrs(["npc_acrobatics_base","npc_animal_handling_base","npc_lore_base","npc_athletics_base","npc_deception_base","npc_history_base","npc_insight_base","npc_intimidation_base","npc_investigation_base","npc_medicine_base","npc_nature_base","npc_perception_base","npc_performance_base","npc_persuasion_base","npc_riddle_base","npc_shadowlore_base","npc_sleight_of_hand_base","npc_stealth_base","npc_survival_base"], function(v) {
+        getAttrs(["npc_acrobatics_base","npc_animal_handling_base","npc_lore_base","npc_athletics_base","npc_deception_base","npc_history_base","npc_insight_base","npc_intimidation_base","npc_investigation_base","npc_medicine_base","npc_nature_base","npc_perception_base","npc_performance_base","npc_persuasion_base","npc_riddle_base","npc_shadowlore_base","npc_sleight_of_hand_base","npc_stealth_base","npc_survival_base","npc_traditions_base"], function(v) {
             var update = {};
             var last_skill = 0; 
             var survival_flag = 0; var survival = ""; var stealth_flag = 0; var stealth = ""; var sleight_of_hand_flag = 0; var sleight_of_hand = ""; var riddle_flag = 0; var riddle = ""; var persuasion_flag = 0; var persuasion = ""; var performance_flag = 0; var sperformance = ""; var perception_flag = 0; var perception = ""; var perception_flag = 0; var perception = ""; var nature_flag = 0; var nature = ""; var medicine_flag = 0; var medicine = ""; var investigation_flag = 0; var investigation = ""; var intimidation_flag = 0; var intimidation = ""; var insight_flag = 0; var insight = ""; var history_flag = 0; var history = ""; var deception_flag = 0; var deception = ""; var athletics_flag = 0; var athletics = ""; var lore_flag = 0; var lore = ""; var animal_handling_flag = 0; var animal_handling = ""; var acrobatics_flag = 0; var acrobatics = ""; 
@@ -8824,7 +8856,7 @@
             if(v.npc_lore_base && v.npc_lore_base != "@{intelligence_mod}") {lore = parseInt(v.npc_lore_base, 10); if(last_skill === 0) {last_skill = 1; lore_flag = lore < 0 ? 4 : 2;} else {lore_flag = lore < 0 ? 3 : 1;} } else {lore_flag = 0; lore = "";};
             if(v.npc_animal_handling_base && v.npc_animal_handling_base != "@{wisdom_mod}") {animal_handling = parseInt(v.npc_animal_handling_base, 10); if(last_skill === 0) {last_skill = 1; animal_handling_flag = animal_handling < 0 ? 4 : 2;} else {animal_handling_flag = animal_handling < 0 ? 3 : 1;} } else {animal_handling_flag = 0; animal_handling = "";};
             if(v.npc_acrobatics_base && v.npc_acrobatics_base != "@{dexterity_mod}") {acrobatics = parseInt(v.npc_acrobatics_base, 10); if(last_skill === 0) {last_skill = 1; acrobatics_flag = acrobatics < 0 ? 4 : 2;} else {acrobatics_flag = acrobatics < 0 ? 3 : 1;} } else {acrobatics_flag = 0; acrobatics = "";};
-
+			if(v.npc_traditions_base && v.npc_traditions_base != "@{intelligence_mod}") {traditions = parseInt(v.npc_traditions_base, 10); if(last_skill === 0) {last_skill = 1; traditions_flag = traditions < 0 ? 4 : 2;} else {traditions_flag = traditions < 0 ? 3 : 1;} } else {traditions_flag = 0; traditions = "";};
             update["npc_skills_flag"] = "" + acrobatics + animal_handling + lore + athletics + deception + history + insight + intimidation + investigation + medicine + nature + perception + sperformance + persuasion + riddle + sleight_of_hand + stealth + survival;
             update["npc_stealth_flag"] = stealth_flag;
             update["npc_survival"] = survival;;
@@ -8866,6 +8898,8 @@
             update["npc_stealth_flag"] = stealth_flag;
             update["npc_survival"] = survival;
             update["npc_survival_flag"] = survival_flag;
+			update["npc_traditions"] = traditions;
+            update["npc_traditions_flag"] = traditions_flag;
             setAttrs(update, {silent: true});
         });
     };
@@ -9024,10 +9058,10 @@
     };
 
     var upgrade_to_2_0 = function(doneupdating) {
-        getAttrs(["npc","strength","dexterity","constitution","intelligence","wisdom","charisma","strength_base","dexterity_base","constitution_base","intelligence_base","wisdom_base","charisma_base","deathsavemod","death_save_mod","npc_str_save","npc_dex_save","npc_con_save","npc_int_save","npc_wis_save","npc_cha_save","npc_str_save_base","npc_dex_save_base","npc_con_save_base","npc_int_save_base","npc_wis_save_base","npc_cha_save_base","npc_acrobatics_base", "npc_animal_handling_base", "npc_lore_base", "npc_athletics_base", "npc_deception_base", "npc_history_base", "npc_insight_base", "npc_intimidation_base", "npc_investigation_base", "npc_medicine_base", "npc_nature_base", "npc_perception_base", "npc_performance_base", "npc_persuasion_base", "npc_riddle_base", "npc_shadowlore_base", "npc_sleight_of_hand_base", "npc_stealth_base", "npc_survival_base", "npc_acrobatics", "npc_animal_handling", "npc_lore", "npc_athletics", "npc_deception", "npc_history", "npc_insight", "npc_intimidation", "npc_investigation", "npc_medicine", "npc_nature", "npc_perception", "npc_performance", "npc_persuasion", "npc_riddle", "npc_shadowlore", "npc_sleight_of_hand", "npc_stealth", "npc_survival"], function(v) {
+        getAttrs(["npc","strength","dexterity","constitution","intelligence","wisdom","charisma","strength_base","dexterity_base","constitution_base","intelligence_base","wisdom_base","charisma_base","deathsavemod","death_save_mod","npc_str_save","npc_dex_save","npc_con_save","npc_int_save","npc_wis_save","npc_cha_save","npc_str_save_base","npc_dex_save_base","npc_con_save_base","npc_int_save_base","npc_wis_save_base","npc_cha_save_base","npc_acrobatics_base", "npc_animal_handling_base", "npc_lore_base", "npc_athletics_base", "npc_deception_base", "npc_history_base", "npc_insight_base", "npc_intimidation_base", "npc_investigation_base", "npc_medicine_base", "npc_nature_base", "npc_perception_base", "npc_performance_base", "npc_persuasion_base", "npc_riddle_base", "npc_shadowlore_base", "npc_sleight_of_hand_base", "npc_stealth_base", "npc_survival_base", "npc_traditions_base", "npc_acrobatics", "npc_animal_handling", "npc_lore", "npc_athletics", "npc_deception", "npc_history", "npc_insight", "npc_intimidation", "npc_investigation", "npc_medicine", "npc_nature", "npc_perception", "npc_performance", "npc_persuasion", "npc_riddle", "npc_shadowlore", "npc_sleight_of_hand", "npc_stealth", "npc_survival", "npc_traditions"], function(v) {
             var update = {};
             var stats = ["strength","dexterity","constitution","intelligence","wisdom","charisma"];
-            var npc_stats = ["npc_str_save","npc_dex_save","npc_con_save","npc_int_save","npc_wis_save","npc_cha_save","npc_acrobatics", "npc_animal_handling", "npc_lore", "npc_athletics", "npc_deception", "npc_history", "npc_insight", "npc_intimidation", "npc_investigation", "npc_medicine", "npc_nature", "npc_perception", "npc_performance", "npc_persuasion", "npc_riddle", "npc_shadowlore", "npc_sleight_of_hand", "npc_stealth", "npc_survival"];
+            var npc_stats = ["npc_str_save","npc_dex_save","npc_con_save","npc_int_save","npc_wis_save","npc_cha_save","npc_acrobatics", "npc_animal_handling", "npc_lore", "npc_athletics", "npc_deception", "npc_history", "npc_insight", "npc_intimidation", "npc_investigation", "npc_medicine", "npc_nature", "npc_perception", "npc_performance", "npc_persuasion", "npc_riddle", "npc_shadowlore", "npc_sleight_of_hand", "npc_stealth", "npc_survival", "npc_traditions"];
             _.each(stats, function(attr) {
                 if(v[attr] && v[attr] != "10" && v[attr + "_base"] == "10") {
                     update[attr + "_base"] = v[attr];
