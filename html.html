@@ -155,9 +155,9 @@
                     <span data-i18n="persuasion-u">PERSUASION</span>
                     <input class="num" type="text" name="attr_npc_persuasion_base" placeholder="0">
                 </div>
-                <div class="row" data-i18n-list-item="religion">
-                    <span data-i18n="religion-u">RELIGION</span>
-                    <input class="num" type="text" name="attr_npc_religion_base" placeholder="0">
+                <div class="row" data-i18n-list-item="riddle">
+                    <span data-i18n="riddle-u">RIDDLE</span>
+                    <input class="num" type="text" name="attr_npc_riddle_base" placeholder="0">
                 </div>
                 <div class="row" data-i18n-list-item="sleight_of_hand">
                     <span data-i18n="sleight_of_hand-u">SLEIGHT OF HAND</span>
@@ -186,7 +186,7 @@
             <input type="hidden" name="attr_npc_perception" value="@{wisdom_mod}">
             <input type="hidden" name="attr_npc_performance" value="@{charisma_mod}">
             <input type="hidden" name="attr_npc_persuasion" value="@{charisma_mod}">
-            <input type="hidden" name="attr_npc_religion" value="@{intelligence_mod}">
+            <input type="hidden" name="attr_npc_riddle" value="@{intelligence_mod}">
             <input type="hidden" name="attr_npc_sleight_of_hand" value="@{dexterity_mod}">
             <input type="hidden" name="attr_npc_stealth" value="@{dexterity_mod}">
             <input type="hidden" name="attr_npc_survival" value="@{wisdom_mod}">
@@ -525,11 +525,11 @@
                     <span class="stat" name="attr_npc_persuasion"></span>
                 </button>
             </span>
-            <span data-i18n-list-item="religion">
-                <input class="flag" type="hidden" name="attr_npc_religion_flag" value="0">
-                <button type="roll" name="roll_npc_religion" value="@{wtype}&{template:npc} @{npc_name_flag} {{rname=^{religion}}} {{mod=@{npc_religion}}} {{r1=[[@{d20}+@{npc_religion}]]}} @{rtype}+@{npc_religion}]]}} {{type=Skill}}">
-                    <span data-i18n="religion">Religion</span>
-                    <span class="stat" name="attr_npc_religion"></span>
+            <span data-i18n-list-item="riddle">
+                <input class="flag" type="hidden" name="attr_npc_riddle_flag" value="0">
+                <button type="roll" name="roll_npc_riddle" value="@{wtype}&{template:npc} @{npc_name_flag} {{rname=^{riddle}}} {{mod=@{npc_riddle}}} {{r1=[[@{d20}+@{npc_riddle}]]}} @{rtype}+@{npc_riddle}]]}} {{type=Skill}}">
+                    <span data-i18n="riddle">Riddle</span>
+                    <span class="stat" name="attr_npc_riddle"></span>
                 </button>
             </span>
             <span data-i18n-list-item="sleight_of_hand">
@@ -1217,10 +1217,10 @@
                             <span name='attr_persuasion_bonus' title='@{persuasion_bonus}'>0</span>
                             <button type='roll' name='roll_persuasion' value='@{wtype}&{template:simple} {{rname=^{persuasion-u}}} {{mod=@{persuasion_bonus}}} {{r1=[[@{d20}+@{persuasion_bonus}@{pbd_safe}]]}} @{rtype}+@{persuasion_bonus}@{pbd_safe}]]}} @{global_skill_mod} @{charname_output}' data-i18n='persuasion-core'>Persuasion <span>(Wis)</span></button>
                         </div>
-                        <div class="skill" data-i18n-list-item="religion">
-                            <input type="checkbox" name="attr_religion_prof" title="@{religion_prof}" value="(@{pb}*@{religion_type})">
-                            <span name='attr_religion_bonus' title='@{religion_bonus}'>0</span>
-                            <button type='roll' name='roll_religion' value='@{wtype}&{template:simple} {{rname=^{religion-u}}} {{mod=@{religion_bonus}}} {{r1=[[@{d20}+@{religion_bonus}@{pbd_safe}]]}} @{rtype}+@{religion_bonus}@{pbd_safe}]]}} @{global_skill_mod} @{charname_output}' data-i18n='religion-core'>Religion <span>(Int)</span></button>
+                        <div class="skill" data-i18n-list-item="riddle">
+                            <input type="checkbox" name="attr_riddle_prof" title="@{riddle_prof}" value="(@{pb}*@{riddle_type})">
+                            <span name='attr_riddle_bonus' title='@{riddle_bonus}'>0</span>
+                            <button type='roll' name='roll_riddle' value='@{wtype}&{template:simple} {{rname=^{riddle-u}}} {{mod=@{riddle_bonus}}} {{r1=[[@{d20}+@{riddle_bonus}@{pbd_safe}]]}} @{rtype}+@{riddle_bonus}@{pbd_safe}]]}} @{global_skill_mod} @{charname_output}' data-i18n='riddle-core'>Riddle <span>(Int)</span></button>
                         </div>
                         <div class="skill" data-i18n-list-item="sleight_of_hand">
                             <input type="checkbox" name="attr_sleight_of_hand_prof" title="@{sleight_of_hand_prof}" value="(@{pb}*@{sleight_of_hand_type})">
@@ -4269,10 +4269,10 @@
                         <span data-i18n="persuasion-core">Persuasion <span>(Cha)</span></span>
                         <span>+</span><input type="text" class="num" name="attr_persuasion_flat" value="0" placeholder="0" title="@{persuasion_flat}">
                     </div>
-                    <div class="row skill" data-i18n-list-item="religion">
-                        <select name="attr_religion_type"><option value="1" selected="selected" data-i18n="normal">Normal</option><option value="2" data-i18n="expirtise">Expertise</option></select>
-                        <span data-i18n="religion-core">Religion <span>(Int)</span></span>
-                        <span>+</span><input type="text" class="num" name="attr_religion_flat" value="0" placeholder="0" title="@{religion_flat}">
+                    <div class="row skill" data-i18n-list-item="riddle">
+                        <select name="attr_riddle_type"><option value="1" selected="selected" data-i18n="normal">Normal</option><option value="2" data-i18n="expirtise">Expertise</option></select>
+                        <span data-i18n="riddle-core">Riddle <span>(Int)</span></span>
+                        <span>+</span><input type="text" class="num" name="attr_riddle_flat" value="0" placeholder="0" title="@{riddle_flat}">
                     </div>
                     <div class="row skill" data-i18n-list-item="sleight_of_hand">
                         <select name="attr_sleight_of_hand_type"><option value="1" selected="selected" data-i18n="normal">Normal</option><option value="2" data-i18n="expirtise">Expertise</option></select>
@@ -4546,7 +4546,7 @@
 <input type='hidden' name='attr_perception_bonus' value='0'>
 <input type='hidden' name='attr_performance_bonus' value='0'>
 <input type='hidden' name='attr_persuasion_bonus' value='0'>
-<input type='hidden' name='attr_religion_bonus' value='0'>
+<input type='hidden' name='attr_riddle_bonus' value='0'>
 <input type='hidden' name='attr_sleight_of_hand_bonus' value='0'>
 <input type='hidden' name='attr_stealth_bonus' value='0'>
 <input type='hidden' name='attr_survival_bonus' value='0'>
@@ -5694,7 +5694,7 @@
 
     on("change:intelligence_mod", function() {
         update_save("intelligence");
-        update_skills(["lore", "history", "investigation", "nature", "religion"]);
+        update_skills(["lore", "history", "investigation", "nature", "riddle"]);
         update_attacks("intelligence");
         update_tool("intelligence");
         update_spell_info("intelligence");
@@ -5826,9 +5826,9 @@
         update_skills(["persuasion"]);
     });
 
-    on("change:religion_prof change:religion_type change:religion_flat", function(eventinfo) {
+    on("change:riddle_prof change:riddle_type change:riddle_flat", function(eventinfo) {
         if(eventinfo.sourceType === "sheetworker") {return;};
-        update_skills(["religion"]);
+        update_skills(["riddle"]);
     });
 
     on("change:sleight_of_hand_prof change:sleight_of_hand_type change:sleight_of_hand_flat", function(eventinfo) {
@@ -6107,7 +6107,7 @@
         }
         update_jack_attr();
         update_initiative();
-        update_skills(["athletics", "acrobatics", "sleight_of_hand", "stealth", "lore", "history", "investigation", "nature", "religion", "animal_handling", "insight", "medicine", "perception", "survival","deception", "intimidation", "performance", "persuasion"]);
+        update_skills(["athletics", "acrobatics", "sleight_of_hand", "stealth", "lore", "history", "investigation", "nature", "riddle", "animal_handling", "insight", "medicine", "perception", "survival","deception", "intimidation", "performance", "persuasion"]);
     });
 
     on("change:initmod change:init_tiebreaker", function(eventinfo) {
@@ -6133,7 +6133,7 @@
         update_npc_saves();
     });
 
-    on("change:npc_acrobatics_base change:npc_animal_handling_base change:npc_lore_base change:npc_athletics_base change:npc_deception_base change:npc_history_base change:npc_insight_base change:npc_intimidation_base change:npc_investigation_base change:npc_medicine_base change:npc_nature_base change:npc_perception_base change:npc_performance_base change:npc_persuasion_base change:npc_religion_base change:npc_sleight_of_hand_base change:npc_stealth_base change:npc_survival_base", function(eventinfo) {
+    on("change:npc_acrobatics_base change:npc_animal_handling_base change:npc_lore_base change:npc_athletics_base change:npc_deception_base change:npc_history_base change:npc_insight_base change:npc_intimidation_base change:npc_investigation_base change:npc_medicine_base change:npc_nature_base change:npc_perception_base change:npc_performance_base change:npc_persuasion_base change:npc_riddle_base change:npc_sleight_of_hand_base change:npc_stealth_base change:npc_survival_base", function(eventinfo) {
         update_npc_skills();
     });
 
@@ -6392,7 +6392,7 @@
     };
 
     var update_skills = function (skills_array) {
-        var skill_parent = {athletics: "strength", acrobatics: "dexterity", sleight_of_hand: "dexterity", stealth: "dexterity", lore: "intelligence", history: "intelligence", investigation: "intelligence", nature: "intelligence", religion: "intelligence", animal_handling: "wisdom", insight: "wisdom", medicine: "wisdom", perception: "wisdom", survival: "wisdom", deception: "charisma", intimidation: "charisma", performance: "charisma", persuasion: "charisma"};
+        var skill_parent = {athletics: "strength", acrobatics: "dexterity", sleight_of_hand: "dexterity", stealth: "dexterity", lore: "intelligence", history: "intelligence", investigation: "intelligence", nature: "intelligence", riddle: "intelligence", animal_handling: "wisdom", insight: "wisdom", medicine: "wisdom", perception: "wisdom", survival: "wisdom", deception: "charisma", intimidation: "charisma", performance: "charisma", persuasion: "charisma"};
         var attrs_to_get = ["pb","pb_type","jack_of_all_trades","jack"];
         var update = {};
         var callbacks = [];
@@ -6783,7 +6783,7 @@
                 update["npc_perception_base"] = "";
                 update["npc_performance_base"] = "";
                 update["npc_persuasion_base"] = "";
-                update["npc_religion_base"] = "";
+                update["npc_riddle_base"] = "";
                 update["npc_sleight_of_hand_base"] = "";
                 update["npc_stealth_base"] = "";
                 update["npc_survival_base"] = "";
@@ -7134,7 +7134,7 @@
             if(mod.indexOf("perception") > -1) {update_skills(["perception"]);};
             if(mod.indexOf("performance") > -1) {update_skills(["performance"]);};
             if(mod.indexOf("persuasion") > -1) {update_skills(["persuasion"]);};
-            if(mod.indexOf("religion") > -1) {update_skills(["religion"]);};
+            if(mod.indexOf("riddle") > -1) {update_skills(["riddle"]);};
             if(mod.indexOf("sleight of hand") > -1) {update_skills(["sleight_of_hand"]);};
             if(mod.indexOf("stealth") > -1) {update_skills(["stealth"]);};
             if(mod.indexOf("survival") > -1) {update_skills(["survival"]);};
@@ -8490,7 +8490,7 @@
             callbacks.push( function() {update_initiative();} );
             callbacks.push( function() {update_tool("all");} );
             callbacks.push( function() {update_all_saves();} );
-            callbacks.push( function() {update_skills(["athletics", "acrobatics", "sleight_of_hand", "stealth", "lore", "history", "investigation", "nature", "religion", "animal_handling", "insight", "medicine", "perception", "survival","deception", "intimidation", "performance", "persuasion"]);} );
+            callbacks.push( function() {update_skills(["athletics", "acrobatics", "sleight_of_hand", "stealth", "lore", "history", "investigation", "nature", "riddle", "animal_handling", "insight", "medicine", "perception", "survival","deception", "intimidation", "performance", "persuasion"]);} );
  
             setAttrs(update, {silent: true}, function() {callbacks.forEach(function(callback) {callback(); })} );
         });
@@ -8771,16 +8771,16 @@
     };
 
     var update_npc_skills = function() {
-        getAttrs(["npc_acrobatics_base","npc_animal_handling_base","npc_lore_base","npc_athletics_base","npc_deception_base","npc_history_base","npc_insight_base","npc_intimidation_base","npc_investigation_base","npc_medicine_base","npc_nature_base","npc_perception_base","npc_performance_base","npc_persuasion_base","npc_religion_base","npc_sleight_of_hand_base","npc_stealth_base","npc_survival_base"], function(v) {
+        getAttrs(["npc_acrobatics_base","npc_animal_handling_base","npc_lore_base","npc_athletics_base","npc_deception_base","npc_history_base","npc_insight_base","npc_intimidation_base","npc_investigation_base","npc_medicine_base","npc_nature_base","npc_perception_base","npc_performance_base","npc_persuasion_base","npc_riddle_base","npc_sleight_of_hand_base","npc_stealth_base","npc_survival_base"], function(v) {
             var update = {};
             var last_skill = 0; 
-            var survival_flag = 0; var survival = ""; var stealth_flag = 0; var stealth = ""; var sleight_of_hand_flag = 0; var sleight_of_hand = ""; var religion_flag = 0; var religion = ""; var persuasion_flag = 0; var persuasion = ""; var performance_flag = 0; var sperformance = ""; var perception_flag = 0; var perception = ""; var perception_flag = 0; var perception = ""; var nature_flag = 0; var nature = ""; var medicine_flag = 0; var medicine = ""; var investigation_flag = 0; var investigation = ""; var intimidation_flag = 0; var intimidation = ""; var insight_flag = 0; var insight = ""; var history_flag = 0; var history = ""; var deception_flag = 0; var deception = ""; var athletics_flag = 0; var athletics = ""; var lore_flag = 0; var lore = ""; var animal_handling_flag = 0; var animal_handling = ""; var acrobatics_flag = 0; var acrobatics = ""; 
+            var survival_flag = 0; var survival = ""; var stealth_flag = 0; var stealth = ""; var sleight_of_hand_flag = 0; var sleight_of_hand = ""; var riddle_flag = 0; var riddle = ""; var persuasion_flag = 0; var persuasion = ""; var performance_flag = 0; var sperformance = ""; var perception_flag = 0; var perception = ""; var perception_flag = 0; var perception = ""; var nature_flag = 0; var nature = ""; var medicine_flag = 0; var medicine = ""; var investigation_flag = 0; var investigation = ""; var intimidation_flag = 0; var intimidation = ""; var insight_flag = 0; var insight = ""; var history_flag = 0; var history = ""; var deception_flag = 0; var deception = ""; var athletics_flag = 0; var athletics = ""; var lore_flag = 0; var lore = ""; var animal_handling_flag = 0; var animal_handling = ""; var acrobatics_flag = 0; var acrobatics = ""; 
 
             // 1 = Positive, 2 = Last, 3 = Negative, 4 = Last Negative
             if(v.npc_survival_base && v.npc_survival_base != "@{wisdom_mod}") {survival = parseInt(v.npc_survival_base, 10); if(last_skill === 0) {last_skill = 1; survival_flag = survival < 0 ? 4 : 2;} else {survival_flag = survival < 0 ? 3 : 1;} } else {survival_flag = 0; survival = "";};
             if(v.npc_stealth_base && v.npc_stealth_base != "@{dexterity_mod}") {stealth = parseInt(v.npc_stealth_base, 10); if(last_skill === 0) {last_skill = 1; stealth_flag = stealth < 0 ? 4 : 2;} else {stealth_flag = stealth < 0 ? 3 : 1;} } else {stealth_flag = 0; stealth = "";};
             if(v.npc_sleight_of_hand_base && v.npc_sleight_of_hand_base != "@{dexterity_mod}") {sleight_of_hand = parseInt(v.npc_sleight_of_hand_base, 10); if(last_skill === 0) {last_skill = 1; sleight_of_hand_flag = sleight_of_hand < 0 ? 4 : 2;} else {sleight_of_hand_flag = sleight_of_hand < 0 ? 3 : 1;} } else {sleight_of_hand_flag = 0; sleight_of_hand = "";};
-            if(v.npc_religion_base && v.npc_religion_base != "@{intelligence_mod}") {religion = parseInt(v.npc_religion_base, 10); if(last_skill === 0) {last_skill = 1; religion_flag = religion < 0 ? 4 : 2;} else {religion_flag = religion < 0 ? 3 : 1;} } else {religion_flag = 0; religion = "";};
+            if(v.npc_riddle_base && v.npc_riddle_base != "@{intelligence_mod}") {riddle = parseInt(v.npc_riddle_base, 10); if(last_skill === 0) {last_skill = 1; riddle_flag = riddle < 0 ? 4 : 2;} else {riddle_flag = riddle < 0 ? 3 : 1;} } else {riddle_flag = 0; riddle = "";};
             if(v.npc_persuasion_base && v.npc_persuasion_base != "@{charisma_mod}") {persuasion = parseInt(v.npc_persuasion_base, 10); if(last_skill === 0) {last_skill = 1; persuasion_flag = persuasion < 0 ? 4 : 2;} else {persuasion_flag = persuasion < 0 ? 3 : 1;} } else {persuasion_flag = 0; persuasion = "";};
             if(v.npc_performance_base && v.npc_performance_base != "@{charisma_mod}") {sperformance = parseInt(v.npc_performance_base, 10); if(last_skill === 0) {last_skill = 1; performance_flag = sperformance < 0 ? 4 : 2;} else {performance_flag = sperformance < 0 ? 3 : 1;} } else {performance_flag = 0; sperformance = "";};
             if(v.npc_perception_base && v.npc_perception_base != "@{wisdom_mod}") {perception = parseInt(v.npc_perception_base, 10); if(last_skill === 0) {last_skill = 1; perception_flag = perception < 0 ? 4 : 2;} else {perception_flag = perception < 0 ? 3 : 1;} } else {perception_flag = 0; perception = "";};
@@ -8796,7 +8796,7 @@
             if(v.npc_animal_handling_base && v.npc_animal_handling_base != "@{wisdom_mod}") {animal_handling = parseInt(v.npc_animal_handling_base, 10); if(last_skill === 0) {last_skill = 1; animal_handling_flag = animal_handling < 0 ? 4 : 2;} else {animal_handling_flag = animal_handling < 0 ? 3 : 1;} } else {animal_handling_flag = 0; animal_handling = "";};
             if(v.npc_acrobatics_base && v.npc_acrobatics_base != "@{dexterity_mod}") {acrobatics = parseInt(v.npc_acrobatics_base, 10); if(last_skill === 0) {last_skill = 1; acrobatics_flag = acrobatics < 0 ? 4 : 2;} else {acrobatics_flag = acrobatics < 0 ? 3 : 1;} } else {acrobatics_flag = 0; acrobatics = "";};
 
-            update["npc_skills_flag"] = "" + acrobatics + animal_handling + lore + athletics + deception + history + insight + intimidation + investigation + medicine + nature + perception + sperformance + persuasion + religion + sleight_of_hand + stealth + survival;
+            update["npc_skills_flag"] = "" + acrobatics + animal_handling + lore + athletics + deception + history + insight + intimidation + investigation + medicine + nature + perception + sperformance + persuasion + riddle + sleight_of_hand + stealth + survival;
             update["npc_stealth_flag"] = stealth_flag;
             update["npc_survival"] = survival;;
             update["npc_acrobatics"] = acrobatics;
@@ -8827,8 +8827,8 @@
             update["npc_performance_flag"] = performance_flag;
             update["npc_persuasion"] = persuasion;
             update["npc_persuasion_flag"] = persuasion_flag;
-            update["npc_religion"] = religion;
-            update["npc_religion_flag"] = religion_flag;
+            update["npc_riddle"] = riddle;
+            update["npc_riddle_flag"] = riddle_flag;
             update["npc_sleight_of_hand"] = sleight_of_hand;
             update["npc_sleight_of_hand_flag"] = sleight_of_hand_flag;
             update["npc_stealth"] = stealth;
@@ -8993,10 +8993,10 @@
     };
 
     var upgrade_to_2_0 = function(doneupdating) {
-        getAttrs(["npc","strength","dexterity","constitution","intelligence","wisdom","charisma","strength_base","dexterity_base","constitution_base","intelligence_base","wisdom_base","charisma_base","deathsavemod","death_save_mod","npc_str_save","npc_dex_save","npc_con_save","npc_int_save","npc_wis_save","npc_cha_save","npc_str_save_base","npc_dex_save_base","npc_con_save_base","npc_int_save_base","npc_wis_save_base","npc_cha_save_base","npc_acrobatics_base", "npc_animal_handling_base", "npc_lore_base", "npc_athletics_base", "npc_deception_base", "npc_history_base", "npc_insight_base", "npc_intimidation_base", "npc_investigation_base", "npc_medicine_base", "npc_nature_base", "npc_perception_base", "npc_performance_base", "npc_persuasion_base", "npc_religion_base", "npc_sleight_of_hand_base", "npc_stealth_base", "npc_survival_base", "npc_acrobatics", "npc_animal_handling", "npc_lore", "npc_athletics", "npc_deception", "npc_history", "npc_insight", "npc_intimidation", "npc_investigation", "npc_medicine", "npc_nature", "npc_perception", "npc_performance", "npc_persuasion", "npc_religion", "npc_sleight_of_hand", "npc_stealth", "npc_survival"], function(v) {
+        getAttrs(["npc","strength","dexterity","constitution","intelligence","wisdom","charisma","strength_base","dexterity_base","constitution_base","intelligence_base","wisdom_base","charisma_base","deathsavemod","death_save_mod","npc_str_save","npc_dex_save","npc_con_save","npc_int_save","npc_wis_save","npc_cha_save","npc_str_save_base","npc_dex_save_base","npc_con_save_base","npc_int_save_base","npc_wis_save_base","npc_cha_save_base","npc_acrobatics_base", "npc_animal_handling_base", "npc_lore_base", "npc_athletics_base", "npc_deception_base", "npc_history_base", "npc_insight_base", "npc_intimidation_base", "npc_investigation_base", "npc_medicine_base", "npc_nature_base", "npc_perception_base", "npc_performance_base", "npc_persuasion_base", "npc_riddle_base", "npc_sleight_of_hand_base", "npc_stealth_base", "npc_survival_base", "npc_acrobatics", "npc_animal_handling", "npc_lore", "npc_athletics", "npc_deception", "npc_history", "npc_insight", "npc_intimidation", "npc_investigation", "npc_medicine", "npc_nature", "npc_perception", "npc_performance", "npc_persuasion", "npc_riddle", "npc_sleight_of_hand", "npc_stealth", "npc_survival"], function(v) {
             var update = {};
             var stats = ["strength","dexterity","constitution","intelligence","wisdom","charisma"];
-            var npc_stats = ["npc_str_save","npc_dex_save","npc_con_save","npc_int_save","npc_wis_save","npc_cha_save","npc_acrobatics", "npc_animal_handling", "npc_lore", "npc_athletics", "npc_deception", "npc_history", "npc_insight", "npc_intimidation", "npc_investigation", "npc_medicine", "npc_nature", "npc_perception", "npc_performance", "npc_persuasion", "npc_religion", "npc_sleight_of_hand", "npc_stealth", "npc_survival"];
+            var npc_stats = ["npc_str_save","npc_dex_save","npc_con_save","npc_int_save","npc_wis_save","npc_cha_save","npc_acrobatics", "npc_animal_handling", "npc_lore", "npc_athletics", "npc_deception", "npc_history", "npc_insight", "npc_intimidation", "npc_investigation", "npc_medicine", "npc_nature", "npc_perception", "npc_performance", "npc_persuasion", "npc_riddle", "npc_sleight_of_hand", "npc_stealth", "npc_survival"];
             _.each(stats, function(attr) {
                 if(v[attr] && v[attr] != "10" && v[attr + "_base"] == "10") {
                     update[attr + "_base"] = v[attr];
@@ -9036,7 +9036,7 @@
                     update_mod("wisdom");
                     update_mod("charisma");
                     update_all_saves();
-                    update_skills(["athletics", "acrobatics", "sleight_of_hand", "stealth", "lore", "history", "investigation", "nature", "religion", "animal_handling", "insight", "medicine", "perception", "survival","deception", "intimidation", "performance", "persuasion"]);
+                    update_skills(["athletics", "acrobatics", "sleight_of_hand", "stealth", "lore", "history", "investigation", "nature", "riddle", "animal_handling", "insight", "medicine", "perception", "survival","deception", "intimidation", "performance", "persuasion"]);
                     update_tool("all")
                     update_attacks("all");
                     update_pb();
