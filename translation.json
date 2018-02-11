@@ -279,6 +279,7 @@
 	"hp-current-u": "CURRENT HIT POINTS",
 	"hp-temp-u": "TEMPORARY HIT POINTS",
 	"total": "Total",
+	"permanent": "Permanent",
 	"hit-dice-u": "HIT DICE",
 	"successes-u": "SUCCESSES",
 	"failures-u": "FAILURES",
