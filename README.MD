@@ -1,4 +1,6 @@
-1. Changed all Arcana to Lore. All works.
-2. Shifted Lore to after Investigation. All works.
-3. Changed all Religion to Arcana. All works.
-4. Added Shadow Lore. All works.
+1. Changed all Arcana to Lore.
+2. Shifted Lore to after Investigation.
+3. Changed all Religion to Arcana.
+4. Added Shadow Lore.
+5. Added Traditions.
+6. Removed EP and PP. Removed Spell Tab. Corrected placement of Core and Bio.
