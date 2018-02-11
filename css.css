@@ -506,7 +506,7 @@ button[type=roll] * {
     cursor: pointer;
     position: absolute;
     top: 0px;
-    left: 10px;
+    left: 5px;
     display: none;
 }
 
