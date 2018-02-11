@@ -4,3 +4,6 @@
 4. Added Shadow Lore.
 5. Added Traditions.
 6. Removed EP and PP. Removed Spell Tab. Corrected placement of Core and Bio.
+7. Replaced SRD picture and Inspiration picture. Shifted Inspiration.
+8. Translation changes.
+9. Class Overhaul.
