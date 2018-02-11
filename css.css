@@ -204,7 +204,7 @@ input[type=radio].sheet-tab-button.sheet-options:checked ~ .sheet-page.sheet-opt
 
 input[type=radio].sheet-tab-button.sheet-core,
 input[type=radio].sheet-tab-button.sheet-core + span {
-    right: 116px;
+    right: 53px;
     width: 45px;
 }
 
