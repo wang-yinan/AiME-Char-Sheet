@@ -4216,7 +4216,7 @@
                     </div>
 					<div class="row skill" data-i18n-list-item="traditions">
                         <select name="attr_traditions_type"><option value="1" selected="selected" data-i18n="normal">Normal</option><option value="2" data-i18n="expirtise">Expertise</option></select>
-                        <span data-i18n="traditions-core">Riddle <span>(Int)</span></span>
+                        <span data-i18n="traditions-core">Traditions <span>(Int)</span></span>
                         <span>+</span><input type="text" class="num" name="attr_traditions_flat" value="0" placeholder="0" title="@{traditions_flat}">
                     </div>
                 </div>
@@ -5767,12 +5767,7 @@
         if(eventinfo.sourceType === "sheetworker") {return;};
         update_skills(["shadowlore"]);
     });
-	
-	on("change:traditions_prof change:traditions_type change:traditions_flat", function(eventinfo) {
-        if(eventinfo.sourceType === "sheetworker") {return;};
-        update_skills(["traditions"]);
-    });
-	
+		
     on("change:sleight_of_hand_prof change:sleight_of_hand_type change:sleight_of_hand_flat", function(eventinfo) {
         if(eventinfo.sourceType === "sheetworker") {return;};
         update_skills(["sleight_of_hand"]);
@@ -5786,6 +5781,11 @@
     on("change:survival_prof change:survival_type change:survival_flat", function(eventinfo) {
         if(eventinfo.sourceType === "sheetworker") {return;};
         update_skills(["survival"]);
+    });
+	
+	on("change:traditions_prof change:traditions_type change:traditions_flat", function(eventinfo) {
+        if(eventinfo.sourceType === "sheetworker") {return;};
+        update_skills(["traditions"]);
     });
 
     on("change:repeating_tool:toolname change:repeating_tool:toolbonus_base change:repeating_tool:toolattr_base change:repeating_tool:tool_mod", function(eventinfo) {
@@ -6334,7 +6334,7 @@
     };
 
     var update_skills = function (skills_array) {
-        var skill_parent = {athletics: "strength", acrobatics: "dexterity", sleight_of_hand: "dexterity", stealth: "dexterity", lore: "intelligence", history: "intelligence", investigation: "intelligence", nature: "intelligence", riddle: "intelligence", shadowlore: "intelligence", animal_handling: "wisdom", insight: "wisdom", medicine: "wisdom", perception: "wisdom", survival: "wisdom", deception: "charisma", intimidation: "charisma", performance: "charisma", persuasion: "charisma"};
+        var skill_parent = {athletics: "strength", acrobatics: "dexterity", sleight_of_hand: "dexterity", stealth: "dexterity", lore: "intelligence", history: "intelligence", investigation: "intelligence", nature: "intelligence", riddle: "intelligence", shadowlore: "intelligence", traditions: "intelligence", animal_handling: "wisdom", insight: "wisdom", medicine: "wisdom", perception: "wisdom", survival: "wisdom", deception: "charisma", intimidation: "charisma", performance: "charisma", persuasion: "charisma"};
         var attrs_to_get = ["pb","pb_type","jack_of_all_trades","jack"];
         var update = {};
         var callbacks = [];
@@ -7078,11 +7078,11 @@
             if(mod.indexOf("performance") > -1) {update_skills(["performance"]);};
             if(mod.indexOf("persuasion") > -1) {update_skills(["persuasion"]);};
             if(mod.indexOf("riddle") > -1) {update_skills(["riddle"]);};
-			if(mod.indexOf("traditions") > -1) {update_skills(["traditions"]);};
 			if(mod.indexOf("shadowlore") > -1) {update_skills(["shadowlore"]);};
             if(mod.indexOf("sleight of hand") > -1) {update_skills(["sleight_of_hand"]);};
             if(mod.indexOf("stealth") > -1) {update_skills(["stealth"]);};
             if(mod.indexOf("survival") > -1) {update_skills(["survival"]);};
+			if(mod.indexOf("traditions") > -1) {update_skills(["traditions"]);};
         });
     };
 
@@ -8359,7 +8359,7 @@
             callbacks.push( function() {update_initiative();} );
             callbacks.push( function() {update_tool("all");} );
             callbacks.push( function() {update_all_saves();} );
-            callbacks.push( function() {update_skills(["athletics", "acrobatics", "sleight_of_hand", "stealth", "lore", "history", "investigation", "nature", "riddle", "shadowlore", "animal_handling", "insight", "medicine", "perception", "survival","deception", "intimidation", "performance", "persuasion"]);} );
+            callbacks.push( function() {update_skills(["athletics", "acrobatics", "sleight_of_hand", "stealth", "lore", "history", "investigation", "nature", "riddle", "traditions", "shadowlore", "animal_handling", "insight", "medicine", "perception", "survival","deception", "intimidation", "performance", "persuasion"]);} );
  
             setAttrs(update, {silent: true}, function() {callbacks.forEach(function(callback) {callback(); })} );
         });
@@ -8910,7 +8910,7 @@
                     update_mod("wisdom");
                     update_mod("charisma");
                     update_all_saves();
-                    update_skills(["athletics", "acrobatics", "sleight_of_hand", "stealth", "lore", "history", "investigation", "nature", "riddle", "shadowlore", "animal_handling", "insight", "medicine", "perception", "survival","deception", "intimidation", "performance", "persuasion"]);
+                    update_skills(["athletics", "acrobatics", "sleight_of_hand", "stealth", "lore", "history", "investigation", "nature", "riddle", "shadowlore", "traditions", "animal_handling", "insight", "medicine", "perception", "survival","deception", "intimidation", "performance", "persuasion"]);
                     update_tool("all")
                     update_attacks("all");
                     update_pb();
