@@ -22,7 +22,7 @@ The sheet also has the PG and DMG's base classes in place of the 5e classes, wit
 The spell list has been disabled, but all code related to the page itself is still intact.
 
 You can see a full to-do list in the issues tracker, including but not limited to:
-1. Auto misery indicator.
-2. Auto shadow weakness selector.
-3. Spell toggle???
+1. Auto shadow weakness selector.
+2. Spell toggle???
+
 
