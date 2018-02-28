@@ -9,17 +9,13 @@
 {
     display: block;
 }
-.sheet-status {
-    display: none;
-    font-size: 9px;
+
+
+.sheet-exhausted-flag[value="TRUE"] ~ .sheet-exhaustion-tag, 
+.sheet-miserable-flag[value="TRUE"] ~ .sheet-shadow-tag {
     color: red;
-    margin-top: 0px;
-    margin-left: 10px;
-    line-height: 12px;
-    width: 100%;
-    text-align: left;
-    font-weight: bold;
 }
+
 .sheet-container {
     width: 750px;
     background-color: white;
