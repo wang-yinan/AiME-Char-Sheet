@@ -1701,15 +1701,15 @@
                 <span class="label" data-i18n="flaws-u">FLAWS</span>
             </div>
             <div class="resources">
-			<div class="status">STATUS EFFECTS APPEAR HERE</div>
 			<div class="hdice-dsaves-container" style="width: 246px; margin-top: 10px;">
                     <div class="subcontainer" style="height: 64px; width: 119px;">
                         <div class="top">
                             <span  data-i18n="perm">Perm</span>
                             <input type="text" name="attr_shadow_max" title="@{shadow_max}">
                         </div>
-                        <input type="number" name="attr_shadow" title="@{shadow}" style="margin-bottom: -6px;">
-                        <input type="text" class="label" name="attr_shadow_name" title="@{shadow_name}" placeholder="SHADOW" data-i18n-placeholder="shadow-u">
+						<input type="hidden" class="miserable-flag" name="attr_miserable">
+                        <input class="shadow-tag" type="number" name="attr_shadow" title="@{shadow}" style="margin-bottom: -6px;">
+                        <input type="text" disabled="disabled" class="label shadow-tag" name="attr_shadow_name" title="@{shadow_name}" placeholder="SHADOW" data-i18n-placeholder="shadow-u">
                         <input type="hidden" name="attr_shadow_itemid">
                     </div>
                     <div class="subcontainer" style="height: 64px; width: 119px; float: right;">
@@ -1717,8 +1717,9 @@
                             <span  data-i18n="total">Total</span>
                             <input type="text" name="attr_exhaustion_max" title="@{exhaustion_max}">
                         </div>
-                        <input type="number" name="attr_exhaustion" title="@{exhaustion}" style="margin-bottom: -6px;">
-                        <input type="text" class="label" name="attr_exhaustion_name" title="@{exhaustion_name}" placeholder="EXHAUSTION" data-i18n-placeholder="exhaustion-u">
+						<input type="hidden" class="exhausted-flag" name="attr_exhausted">
+                        <input type="number" class="exhaustion-tag" name="attr_exhaustion" title="@{exhaustion}" style="margin-bottom: -6px;">
+                        <input type="text" disabled="disabled" class="label exhaustion-tag" name="attr_exhaustion_name" title="@{exhaustion_name}" placeholder="EXHAUSTION" data-i18n-placeholder="exhaustion-u">
                         <input type="hidden" name="attr_exhaustion_itemid">
                     </div>
                 </div>
@@ -1737,7 +1738,7 @@
                             <input type="text" name="attr_other_resource_max" title="@{other_resource_max}">
                         </div>
                         <input type="number" name="attr_other_resource" title="@{other_resource}" style="margin-bottom: -6px;">
-                        <input type="text" class="label" name="attr_other_resource_name" title="@{other_resource_name}" placeholder="POSITION" data-i18n-placeholder="position-u">
+                        <input type="text" disabled="disabled" class="label" name="attr_other_resource_name" title="@{other_resource_name}" placeholder="POSITION" data-i18n-placeholder="position-u">
                         <input type="hidden" name="attr_other_resource_itemid">
                     </div>
                 </div>
@@ -6156,6 +6157,35 @@
         update_passive_perception();
     });
     
+	on("change:shadow change:wisdom", function(eventinfo) {
+		update_misery();
+		});
+		
+		function update_misery() {
+		getAttrs(["shadow","wisdom"], function(v) {
+		var update = {};
+		update["miserable"] = "";
+		if (parseInt(v["shadow"])>parseInt(v["wisdom"])) {
+		update["miserable"] = "TRUE";
+		}
+		setAttrs(update, {silent: true});
+		});
+		}
+		
+	on("change:exhaustion", function(eventinfo) {
+		update_exhaustion();
+		});
+		
+		function update_exhaustion() {
+		getAttrs(["exhaustion"], function(v) {
+		var update = {};
+		update["exhausted"] = "";
+		if (parseInt(v["exhaustion"])>0) {
+		update["exhausted"] = "TRUE";
+		}
+		setAttrs(update, {silent: true});
+		});
+		}	
     on("remove:repeating_inventory", function(eventinfo) {
         var itemid = eventinfo.sourceAttribute.substring(20, 40);
         var attackid = eventinfo.removedInfo && eventinfo.removedInfo["repeating_inventory_" + itemid + "_itemattackid"] ? eventinfo.removedInfo["repeating_inventory_" + itemid + "_itemattackid"] : undefined;
